@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>单细胞建树方法资料</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1d1c1a;--muted:#5d5a54;--line:#cfc9bd;--accent:#8a3b12;--card:#fffdf8;--bad:#a8261b}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#161513;--ink:#ece8df;--muted:#a7a196;--line:#45413a;--accent:#e08a5a;--card:#1f1d1a;--bad:#f08a7e}}
+:root[data-theme="dark"]{--bg:#161513;--ink:#ece8df;--muted:#a7a196;--line:#45413a;--accent:#e08a5a;--card:#1f1d1a;--bad:#f08a7e}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);
+  font:17px/1.6 "PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif}
+form{width:min(420px,calc(100vw - 32px));padding:32px 28px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+h1{font-size:24px;line-height:1.3;margin:0 0 6px;font-weight:600}
+p{margin:0 0 22px;color:var(--muted);font-size:15px}
+label{display:block;font-size:15px;margin-bottom:6px}
+input{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+input:focus{outline:2px solid var(--accent);outline-offset:1px}
+button{margin-top:16px;width:100%;font:inherit;font-weight:600;padding:10px 12px;border:0;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}
+.msg{min-height:1.6em;margin:12px 0 0;color:var(--bad);font-size:15px}
+</style>
+</head>
+<body>
+<form id="f" autocomplete="on">
+  <h1>单细胞建树方法资料</h1>
+  <p>这份材料只给受邀的人看，请输入访问密码。</p>
+  <label for="pw">访问密码</label>
+  <input id="pw" type="password" autocomplete="current-password" required autofocus>
+  <button id="go" type="submit">打开</button>
+  <div class="msg" id="msg" role="alert"></div>
+</form>
+<script id="enc" type="application/octet-stream">tH2gtdBJYneVvSnoJVTE+T552lejSmBG4MDrJVidbBVGSyR7W/5A+XdUgIFOlmknErkedIxAutbYaYpVhypdNdfgfys/UXFMnCj+OQKYmiMI/+9yX4DZWYr01B6j0zUcDPx7rLAUPZImU149QQYuTuT/lUfnuVuSg3/VhWuHUJunbiRHQwd9EeacAnp23PeVjYcV/+G8QbhzxADc21R1phWGO9wtgS0IlCImULXlW+94etYMRERx9yH1uZhLTEyyYjBxmakSg1XbRPolfeUlZGYN2k9EN7u5YZ4MNB6OHv6Ie+HfQLQWHfzzeSG0QeMUuGwwcnkrGrOi3zXDtfcdt5Hz16bKQ46A5pDQFbuYE4dcZvWHkcs7ZFgzdmC55xw+LuGpLY8/vV6617+dGsj686jxRzCcWbQSXUWxG0glYJgIFX5Tu9P1PwErh6zlsjVUpMuR8hahw9bDNPYBTNyFT27oGuNwxTpTAsxfwcBVrFOjcDT04sSOso7+VTddyv+Mmpy+2mI70yJkiJvVTkUWhT1USV6rbR5YC5zqy4K8LvYM4uv0vQqP+ZIXEYltlp4GyJ1cgmeGSgp+XCBAFugGn3HgqVC9KzxmVNKcl/SJYWArMTO1rh+67g7Bu2v3bkh01veX2LMRWjlccBzLZARt8zZvaUnYVoo9sMH77VPfRMV4L6BqStDAnLA644qECVlJrNxlarsfEVGkwXqbTbFRVYQPGXCfp7p+Hys8Bk9WhMXe3yI0lVGiWcNI6NxL4oNV1UtowYH/YwNWNjhfZ1RUEEKABURF4Zn1Hm5g7wTq1y3T6GujqYCB7xVlgq3qzrGWz66kD2WGw3GDi2Gz2lsiFyJHZ3cDXDWca27IS8I827xSUZGoqC0KAAp0xmkzmxhtnYbXlt/ZmzXq2gdlpUc5ZIpR+Z880pK+FUAPWyaDwsDkwC3J8sihm+lPrArqn8lRiVc3/XQH/uHNKxljSapOQ7DezW4DrrLybNPmfzTquajiZw/TefiQNVmMaqqBPn3HC5BGAMnia59/ABgv/VWmeNlu7TIWPhZ2AZECZG2ViEygxQ8fiSeCk30EWoA1qkRY4Pamn+5waAW/wOhEDv3Bdii2yR/YDlNEFM+DGUo0tf2kX9PFDqUKGzwAy9QnF5VC5DmjIq/VZgl1jwC39Vt9BHvdSwfYKrsoWMG9ONMkzI2xhom/E2hBcr+sdLmdrxRW5Ng8raqWI3m0PWpGgI9y2aUb5LMS9XEDwWFNo49ZR8gav5Xb74E9YyL9K+npo+BYk0qFVN0KRF3ST9nxQmfrF/JZDX4+mrYj4xZTdkKbiCq22ZXfsWlHh1snP6t+0C9CIuxIXr9nKId8IrxnWxqYFciQRC9lwlSGCHS6I+IvkZNSDH2wo4UVr2vENvMShbNX0J0gLSFkG2z4EB/E5iXDN4suODwMPR3B+6ji2pvC7VshHMdaJrNcNh0a9/4FqV4uJb4c77pSbNmLbUR+1jDNULwdT8qGG0WnBuz5f7blGnWD8q5Z0h9a+9FAdUlIC4ctly1fXpw5UHtbhNYvKHRF1WsN2iDtPbc+xUcNFbEqhI6CirqBagY30BA5Gn1N98dvPwSTgv0tP1ybXo7vNEvrFl/bJkJGZ9IDDPfIyEBjE2tfXtGclXMnnC3Sw9dWCUEty/a9/vZS8p8RjipnhX+hmpV4eODmcRK0RdvwF8hBxDtj4Uz7L01SIBuQHUs509zet4JXCz708o9j39EsU318D6eXcKwioLaLAdQoZOhXpFVYyxVwMNgBQgKMz09S3DzVJWkscGk7IkwtzSR1luK0lljyjc48CWZkUp/QHKDDXXf+GqW/TG4RSfi0hD2uaErc/XoALI28294O8STi9pMyvdOYqpxG5LyHsAKXHsXE5T+6g3pOsoeBWhi7GTiMXhkxJJY3kn2IfKI8h1NxcxotE1+un1g29n9B+2DK+5A1jA6YFdZr1G0ygGT0BcDmf6NreuacMUCL/A5ejPYziQ+7OPlGwJ312Nn1MBDtyC8JIsdrEFGwvNawvMYldNaWInDP0oMDA1SmVc1mg9d3hDaYOVEloeJqF2RwMxar1TE7gn8JoN3alRtSzXmn2zEzpjTt0lrnoYaRhLlG5sfhb91LcNPKzAQKhW1VNs+9ALjSv6ykM6L4bdUkw1ZY7Yn1DZtWetYDQy59Jw02yWChgqYrLlX4kOdxCW1OUlsidMzoamg6BxvToip4fwx0/TVkSBoMUTtUKfTvgTlFgnw5j58U3x+jLy9M</script>
+<script>
+(() => {
+  const SALT = 'coDxk6GarxlTffn1cNwASA==', IV = 'xkzZZeACTYQmHimc', ITER = 600000, KEEP = 'tree-site-pass';
+  const bytes = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
+  const f = document.getElementById('f'), pw = document.getElementById('pw'), go = document.getElementById('go'), msg = document.getElementById('msg');
+  async function open(pass){
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: bytes(SALT), iterations: ITER, hash: 'SHA-256'},
+      base, {name: 'AES-GCM', length: 256}, false, ['decrypt']);
+    const plain = await crypto.subtle.decrypt({name: 'AES-GCM', iv: bytes(IV)}, key, bytes(document.getElementById('enc').textContent));
+    const html = await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+    try { localStorage.setItem(KEEP, pass); } catch (e) {}
+    document.open(); document.write(html); document.close();
+  }
+  async function tryOpen(pass, quiet){
+    go.disabled = true; msg.textContent = quiet ? '' : '正在打开……';
+    try { await open(pass); }
+    catch (e) {
+      try { localStorage.removeItem(KEEP); } catch (e2) {}
+      msg.textContent = quiet ? '' : (window.crypto && crypto.subtle ? '密码不对，请再试一次。' : '请用 https 地址打开这一页。');
+      go.disabled = false; pw.select();
+    }
+  }
+  f.addEventListener('submit', e => { e.preventDefault(); tryOpen(pw.value, false); });
+  let saved = null; try { saved = localStorage.getItem(KEEP); } catch (e) {}
+  if (saved) tryOpen(saved, true);
+})();
+</script>
+</body>
+</html>
